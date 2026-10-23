@@ -1,5 +1,5 @@
 [project]
-name = "100P"
+name = "L00P"
 version = "0.1.0"
 description = "Silly math game"
 readme = "README.md"
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-100p = "100p:main"
+L00P = "L00P:main"
 
 [build-system]
 requires = ["uv_build>=0.13.5,<0.14.0"]
