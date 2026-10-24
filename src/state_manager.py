@@ -1,17 +1,19 @@
 import pygame
 
 class StateManager():
-    def __init__(self):
-        self.current_state = "MENU" # or 'PLAYING'
+    def __init__(self, initial_state):
+        self.current_state = initial_state
+
+    def change_state(self, new_state):
+        self.current_state = new_state
 
     def handle_event(self, event):
-        # menu -> game interaction
-        pass 
+        next_state = self.current_state.handle_event(event)
+        if next_state:
+            self.change_state(next_state)
 
     def update(self, dt):
-        # menu | game update cycles here
-        pass
+        self.current_state.update()
 
     def draw(self, screen):
-        # for drawing, no shit Sherlock
-        pass
+        self.current_state.draw(screen)

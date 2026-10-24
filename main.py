@@ -3,6 +3,7 @@ import sys
 
 from src.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from src.state_manager import StateManager
+from src.ui.menu import MenuState
 from src.utils.loader import assets
 
 class Game:
@@ -13,7 +14,8 @@ class Game:
         pygame.display.set_caption('100P')
         self.clock = pygame.time.Clock()
 
-        self.state_manager = StateManager()
+        self.initial_state = MenuState()
+        self.state_manager = StateManager(self.initial_state)
         self.dt = 0 # delta-time
 
         # TEST

@@ -6,4 +6,4 @@ class Character():
 
         self.health = 100
         self.pos = pygame.Vector2(0, 0)
-        self.deck = [] #
+        self.deck = [] # player cards
