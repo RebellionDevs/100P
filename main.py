@@ -3,7 +3,7 @@ import sys
 
 from src.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from src.state_manager import StateManager
-from src.loader import assets
+from src.utils.loader import assets
 
 class Game:
     def __init__(self):
