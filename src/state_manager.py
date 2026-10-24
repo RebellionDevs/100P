@@ -13,7 +13,7 @@ class StateManager():
             self.change_state(next_state)
 
     def update(self, dt):
-        self.current_state.update()
+        self.current_state.update(dt)
 
     def draw(self, screen):
         self.current_state.draw(screen)

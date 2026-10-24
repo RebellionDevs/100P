@@ -4,7 +4,6 @@ import sys
 from src.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS
 from src.state_manager import StateManager
 from src.ui.menu import MenuState
-from src.utils.loader import assets
 
 class Game:
     def __init__(self):
@@ -17,9 +16,6 @@ class Game:
         self.initial_state = MenuState()
         self.state_manager = StateManager(self.initial_state)
         self.dt = 0 # delta-time
-
-        # TEST
-        self.bg = assets.load_image("game_background.jpg", (SCREEN_WIDTH, SCREEN_HEIGHT))
 
     def run(self): # main game cycle
         while True:
@@ -35,7 +31,6 @@ class Game:
 
             self.state_manager.update(self.dt)
 
-            self.screen.blit(self.bg, (0, 0))
             self.state_manager.draw(self.screen)
             pygame.display.update()
 

@@ -1,7 +1,7 @@
 import pygame
 
 from utils.loader import assets
-from character import Character
+from .character import Character
 
 class Player(Character):
 

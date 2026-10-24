@@ -12,9 +12,8 @@ class MenuState:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.play_rect.collidepoint(event.pos):
                 print("play button pressed")
-                # from game import GameState (?)
-                # return GameState()
-                pass
+                from game import GameState
+                return GameState()
             elif self.settings_rect.collidepoint(event.pos):
                 print("settings button pressed")
                 # from ui.settings import SettingsState
@@ -22,7 +21,7 @@ class MenuState:
                 pass
         return None
 
-    def update(self):
+    def update(self, dt):
         pass
 
     def draw(self, surface):
