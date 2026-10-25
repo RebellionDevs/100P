@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://bql1oqe27krys" path="res://assets/sprites/bullet.png" id="2_y25gk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lstfj"]
+radius = 5.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=573994088]
 script = ExtResource("1_mkf8s")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=183231814]
-position = Vector2(1.1920929e-07, 1.1920929e-07)
-scale = Vector2(0.30588263, 0.30588263)
+scale = Vector2(0.14089312, 0.14089312)
 texture = ExtResource("2_y25gk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=489801703]
