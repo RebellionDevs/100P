@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://be8qbmt0fe144"]
+
+[ext_resource type="Script" uid="uid://cwqmrrjai1glx" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://dtclgpudk4ih3" path="res://scenes/bullet.tscn" id="2_g2els"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hh6ca"]
+
+[node name="Node2D" type="Node2D" unique_id=820453694]
+script = ExtResource("1_3vyb7")
+bullet_scene = ExtResource("2_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2146723943]
+texture = SubResource("PlaceholderTexture2D_hh6ca")

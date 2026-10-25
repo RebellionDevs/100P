@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://dtbobnacrtecd"]
 
 [ext_resource type="Texture2D" uid="uid://byop1bjfun2tx" path="res://assets/sprites/background.png" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://d4mywpr5tytwv" path="res://scripts/game.gd" id="1_yqjtg"]
 
-[node name="Node2D" type="Node2D" unique_id=1915535653]
+[node name="Game" type="Node2D" unique_id=1915535653]
+script = ExtResource("1_yqjtg")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1164646141]
 offset_right = 1600.0
 offset_bottom = 900.0
 texture = ExtResource("1_uwrxv")
 stretch_mode = 1
+
+[node name="CurrentLevel" type="Node2D" parent="." unique_id=1779409398]

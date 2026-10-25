@@ -1,17 +1,11 @@
 [gd_scene format=3 uid="uid://yicge48108e0"]
 
-[ext_resource type="Texture2D" uid="uid://byop1bjfun2tx" path="res://assets/sprites/background.png" id="1_f6ksk"]
 [ext_resource type="Script" uid="uid://b275oxie6xxlq" path="res://scripts/level_1.gd" id="1_w8wmq"]
 [ext_resource type="Texture2D" uid="uid://0k07ly25m7qg" path="res://assets/sprites/test-level.png" id="2_w8wmq"]
+[ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://scenes/player.tscn" id="3_w8wmq"]
 
 [node name="Node2D" type="Node2D" unique_id=2108211932]
 script = ExtResource("1_w8wmq")
-
-[node name="BackGround" type="TextureRect" parent="." unique_id=777292158]
-offset_right = 1600.0
-offset_bottom = 900.0
-texture = ExtResource("1_f6ksk")
-stretch_mode = 1
 
 [node name="LevelSprite" type="Sprite2D" parent="." unique_id=8877852]
 position = Vector2(395.99997, 49)
@@ -44,14 +38,16 @@ polygon = PackedVector2Array(407, 491, 572, 492, 574, 457, 407, 460)
 [node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="Walls" unique_id=639958881]
 polygon = PackedVector2Array(1070, 555, 1074, 835, 606, 833, 604, 662, 642, 661, 646, 794, 1038, 797, 1038, 551)
 
-[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="Walls" unique_id=238853677 groups=["function_wall"]]
-polygon = PackedVector2Array(443, 205, 535, 91, 517, 77, 423, 194)
+[node name="Function Wall" type="StaticBody2D" parent="." unique_id=1631518726 groups=["function_wall"]]
 
-[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="Walls" unique_id=1463182295 groups=["function_wall"]]
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="Function Wall" unique_id=1463182295 groups=["function_wall"]]
 polygon = PackedVector2Array(969, 815, 1050, 677, 1065, 691, 985, 823)
 
-[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="Walls" unique_id=290307485 groups=["function_wall"]]
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="Function Wall" unique_id=290307485 groups=["function_wall"]]
 polygon = PackedVector2Array(1451, 89, 1536, 217, 1550, 204, 1473, 73)
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="Function Wall" unique_id=238853677 groups=["function_wall"]]
+polygon = PackedVector2Array(443, 205, 535, 91, 517, 77, 423, 194)
 
 [node name="IntegralZone" type="Area2D" parent="." unique_id=1830070504]
 
@@ -60,6 +56,10 @@ polygon = PackedVector2Array(602, 302, 746, 301, 744, 432, 598, 432)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="IntegralZone" unique_id=1328726317]
 polygon = PackedVector2Array(859, 310, 860, 437, 1008, 434, 1007, 309)
+
+[node name="Player" parent="." unique_id=820453694 instance=ExtResource("3_w8wmq")]
+position = Vector2(1395, 515)
+scale = Vector2(50, 50)
 
 [connection signal="body_entered" from="IntegralZone" to="." method="_on_integral_zone_body_entered"]
 [connection signal="body_exited" from="IntegralZone" to="." method="_on_integral_zone_body_exited"]
