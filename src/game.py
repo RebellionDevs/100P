@@ -3,6 +3,7 @@ import pygame
 from utils.loader import assets
 from entities.player import Player
 from entities.enemy import Enemy
+from entities.board import Board
 from config import *
 
 class GameState():
@@ -12,6 +13,9 @@ class GameState():
 
         self.player = Player()
         self.enemy = Enemy()
+
+        # Test
+        self.board = Board()
 
         self.cards = [] # all cards
         self.discard = [] # used cards
@@ -29,3 +33,4 @@ class GameState():
 
     def draw(self, screen):
         screen.blit(self.bg, (0, 0))
+        self.board.draw(screen)
