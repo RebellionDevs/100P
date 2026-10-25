@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dolw07msf17ta"]
+
+[ext_resource type="Texture2D" uid="uid://cv20g8cpvys80" path="res://assets/sprites/Drawing 2026-10-25 17.21.30.excalidraw.png" id="1_vb1sn"]
+
+[node name="Node2D" type="Node2D" unique_id=2035666136]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=153735305]
+position = Vector2(467.00003, 48)
+scale = Vector2(1.393, 1.393)
+texture = ExtResource("1_vb1sn")
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1983858840]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Walls" unique_id=674692284]
+polygon = PackedVector2Array(-169, -298, -169, -298, -166, 394, -126, 392, -125, -305)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Walls" unique_id=1895282137]
+polygon = PackedVector2Array(488, -83, 524, -84, 528, 195, 493, 198)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls" unique_id=528003951]
+polygon = PackedVector2Array(-167, -341, 1103, -338, 1104, -301, -167, -305, -167, -305)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Walls" unique_id=1255286799]
+polygon = PackedVector2Array(1060, -302, 1104, -302, 1103, 436, 1057, 435)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Walls" unique_id=2078845204]
+polygon = PackedVector2Array(-167, 395, 1101, 399, 1103, 439, -167, 434)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="Walls" unique_id=1544556147]
+polygon = PackedVector2Array(120, 96, 155, 96, 154, 424, 120, 423)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="Walls" unique_id=1006115955]
+polygon = PackedVector2Array(779, -336, 816, -336, 816, -336, 820, -4, 782, -3)
+
+[node name="Function Wall" type="StaticBody2D" parent="." unique_id=418968381]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Function Wall" unique_id=420483447]
+polygon = PackedVector2Array(131, 285, 223, 412, 241, 402, 154, 271, 154, 271)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Function Wall" unique_id=914816418]
+polygon = PackedVector2Array(702, -314, 792, -187, 808, -197, 721, -326)
+
+[node name="IntegralZone" type="Area2D" parent="." unique_id=1656360397]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="IntegralZone" unique_id=1845784552]
+polygon = PackedVector2Array(122, -192, 273, -195, 275, -67, 120, -63, 120, -63)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="IntegralZone" unique_id=161326681]
+polygon = PackedVector2Array(710, 112, 866, 112, 867, 238, 706, 238)
