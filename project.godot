@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="100P"
 run/main_scene="uid://2yvq6yiiep7y"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
@@ -25,6 +25,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 function_wall="allow to use function card"
+player=""
 
 [physics]
 

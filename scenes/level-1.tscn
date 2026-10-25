@@ -58,7 +58,7 @@ polygon = PackedVector2Array(602, 302, 746, 301, 744, 432, 598, 432)
 polygon = PackedVector2Array(859, 310, 860, 437, 1008, 434, 1007, 309)
 
 [node name="Player" parent="." unique_id=820453694 instance=ExtResource("3_w8wmq")]
-position = Vector2(1395, 515)
+position = Vector2(1392.9999, 477.99997)
 scale = Vector2(50, 50)
 
 [connection signal="body_entered" from="IntegralZone" to="." method="_on_integral_zone_body_entered"]
