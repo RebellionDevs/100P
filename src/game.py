@@ -17,7 +17,7 @@ class GameState():
         self.discard = [] # used cards
 
         # graphics
-        self.bg = assets.load_image("game_background.jpg", (SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.bg = assets.load_image_tiled("game_background.jpg", SCREEN_WIDTH, SCREEN_HEIGHT, scale_factor=0.8)
 
     def handle_event(self, event):
         # self.sub_state changes here
