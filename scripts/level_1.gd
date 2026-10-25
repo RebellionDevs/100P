@@ -7,7 +7,7 @@ var bullets_in_zone: Array[Node2D] = []
 func _ready() -> void:
 	pass
 
-func _process() -> void:
+func _process(delta: float) -> void:
 	for bullet in bullets_in_zone:
 		if is_instance_valid(bullet):
 			if bullet.has_method("update_integral_effect"):

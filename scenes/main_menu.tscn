@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://2yvq6yiiep7y"]
 
 [ext_resource type="Script" uid="uid://diogpnw6nc1vc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://cgese1cmjyqv" path="res://scripts/animated_button.gd" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://cbpmpb2xf03sx" path="res://assets/sprites/play_button.png" id="3_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://dyu74nkum7pdb" path="res://assets/sprites/play_button_2.png" id="4_oa1go"]
+[ext_resource type="Texture2D" uid="uid://bpv14asgo1sdw" path="res://assets/sprites/play_button_hover.png" id="5_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://capiqecnc3txd" path="res://assets/sprites/play_button_hover_2.png" id="6_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://bo05b5mqtvuty" path="res://assets/sprites/settings_button.png" id="7_5dd4i"]
+[ext_resource type="Texture2D" uid="uid://du80bb6lm6try" path="res://assets/sprites/settings_button_2.png" id="8_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://c64propvvhpaa" path="res://assets/sprites/settings_button_hover.png" id="9_flqon"]
+[ext_resource type="Texture2D" uid="uid://bfcb3u4oy4lh2" path="res://assets/sprites/settings_button_hover_2.png" id="10_rcqid"]
 
 [node name="Control" type="Control" unique_id=416109375]
 layout_mode = 3
@@ -9,21 +18,27 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_l6cm7")
 
-[node name="SettingsButton" type="Button" parent="." unique_id=2116643897]
+[node name="PlayButton" type="TextureButton" parent="." unique_id=1559045769]
 layout_mode = 0
-offset_left = 620.0
-offset_top = 294.0
-offset_right = 892.0
-offset_bottom = 383.0
-text = "Settings"
+offset_left = 67.0
+offset_top = 53.0
+offset_right = 296.0
+offset_bottom = 150.0
+script = ExtResource("2_ekxnf")
+normal_frames = Array[Texture2D]([ExtResource("3_rtw2f"), ExtResource("4_oa1go")])
+hover_frames = Array[Texture2D]([ExtResource("5_tbmy8"), ExtResource("6_jk1qb")])
+frame_interval = 0.5
 
-[node name="PlayButton" type="Button" parent="." unique_id=455040171]
+[node name="SettingsButton" type="TextureButton" parent="." unique_id=1541725738]
 layout_mode = 0
-offset_left = 618.0
-offset_top = 175.0
-offset_right = 890.0
-offset_bottom = 276.0
-text = "Play"
+offset_left = 66.0
+offset_top = 262.0
+offset_right = 338.0
+offset_bottom = 351.0
+script = ExtResource("2_ekxnf")
+normal_frames = Array[Texture2D]([ExtResource("7_5dd4i"), ExtResource("8_lgwnu")])
+hover_frames = Array[Texture2D]([ExtResource("9_flqon"), ExtResource("10_rcqid")])
+frame_interval = 0.5
 
 [node name="SettingsPopup" type="Panel" parent="." unique_id=1899535701]
 visible = false
