@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://yicge48108e0"]
 
 [ext_resource type="Script" uid="uid://b275oxie6xxlq" path="res://scripts/level_1.gd" id="1_w8wmq"]
-[ext_resource type="Texture2D" uid="uid://0k07ly25m7qg" path="res://assets/sprites/test-level.png" id="2_w8wmq"]
+[ext_resource type="Texture2D" uid="uid://0k07ly25m7qg" path="res://assets/sprites/level-1.png" id="2_w8wmq"]
 [ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://scenes/player.tscn" id="3_w8wmq"]
+[ext_resource type="PackedScene" uid="uid://q3w2hwk1ne3n" path="res://scenes/enemy.tscn" id="4_67dni"]
 
 [node name="Node2D" type="Node2D" unique_id=2108211932]
 script = ExtResource("1_w8wmq")
@@ -60,6 +61,10 @@ polygon = PackedVector2Array(859, 310, 860, 437, 1008, 434, 1007, 309)
 [node name="Player" parent="." unique_id=820453694 instance=ExtResource("3_w8wmq")]
 position = Vector2(1392.9999, 477.99997)
 scale = Vector2(50, 50)
+
+[node name="Enemy" parent="." unique_id=248845660 instance=ExtResource("4_67dni")]
+position = Vector2(528, 684)
+scale = Vector2(60, 60)
 
 [connection signal="body_entered" from="IntegralZone" to="." method="_on_integral_zone_body_entered"]
 [connection signal="body_exited" from="IntegralZone" to="." method="_on_integral_zone_body_exited"]

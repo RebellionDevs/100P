@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0k07ly25m7qg"
-path="res://.godot/imported/test-level.png-c9daf12246469d030cf15173f944f0e6.ctex"
+uid="uid://bkykxj2hhcjrv"
+path="res://.godot/imported/evil_ai.png-2bc6cf9343ccf63884be0c275fc792e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/test-level.png"
-dest_files=["res://.godot/imported/test-level.png-c9daf12246469d030cf15173f944f0e6.ctex"]
+source_file="res://assets/sprites/evil_ai.png"
+dest_files=["res://.godot/imported/evil_ai.png-2bc6cf9343ccf63884be0c275fc792e9.ctex"]
 
 [params]
 
