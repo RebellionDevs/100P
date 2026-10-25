@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://2yvq6yiiep7y"]
+
+[ext_resource type="Script" uid="uid://diogpnw6nc1vc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[node name="Control" type="Control" unique_id=416109375]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_l6cm7")
+
+[node name="SettingsButton" type="Button" parent="." unique_id=2116643897]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 294.0
+offset_right = 892.0
+offset_bottom = 383.0
+text = "Settings"
+
+[node name="PlayButton" type="Button" parent="." unique_id=455040171]
+layout_mode = 0
+offset_left = 618.0
+offset_top = 175.0
+offset_right = 890.0
+offset_bottom = 276.0
+text = "Play"
+
+[node name="SettingsPopup" type="Panel" parent="." unique_id=1899535701]
+visible = false
+layout_mode = 0
+offset_left = 409.0
+offset_top = 129.0
+offset_right = 1209.0
+offset_bottom = 729.0
+
+[node name="CloseButton" type="Button" parent="SettingsPopup" unique_id=615231405]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 530.0
+offset_right = 126.0
+offset_bottom = 584.0
+text = "Return"

@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxo7667c3602q"
-valid=false
+uid="uid://jwa6in0iujt"
+path="res://.godot/imported/test-level.png-c9daf12246469d030cf15173f944f0e6.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/sprites/game_background.jpg"
+source_file="res://assets/sprites/test-level.png"
+dest_files=["res://.godot/imported/test-level.png-c9daf12246469d030cf15173f944f0e6.ctex"]
 
 [params]
 
