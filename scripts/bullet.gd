@@ -8,7 +8,6 @@ var is_following_path: bool = false
 var is_frozen: bool = false
 var ends_on_wall: bool = false
 var is_under_function: bool = false
-var inside_integral_zone: bool = false
 
 func setup_path(points: PackedVector2Array, speed: float, hits_wall_at_end: bool, under_func: bool = false) -> void:
 	path_points = points
@@ -55,17 +54,3 @@ func _physics_process(delta: float) -> void:
 	if distance <= step:
 		global_position = target_pos
 		current_point_index += 1
-
-func enter_integral_zone() -> void:
-	inside_integral_zone = true
-
-func exit_integral_zone() -> void:
-	inside_integral_zone = false
-
-func update_integral_effect(delta: float) -> void:
-	if is_under_function and not path_points.is_empty():
-		var target_pos = path_points[current_point_index]
-		var dir = (target_pos - global_position)
-		if dir.length() > 1.0:
-			var perp = Vector2(-dir.y, dir.x).normalized()
-			path_points[current_point_index] += perp * 800.0 * delta
