@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg2w0asvvr57o"
-path="res://.godot/imported/singularity_card.png-d038f299aa72ee2d23335f73bd1d2288.ctex"
+uid="uid://c244c08y85veb"
+path="res://.godot/imported/beurnulli.png-b7176a5ca3f5fe803371a33d483b98cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/singularity_card.png"
-dest_files=["res://.godot/imported/singularity_card.png-d038f299aa72ee2d23335f73bd1d2288.ctex"]
+source_file="res://assets/sprites/cards/beurnulli.png"
+dest_files=["res://.godot/imported/beurnulli.png-b7176a5ca3f5fe803371a33d483b98cb.ctex"]
 
 [params]
 

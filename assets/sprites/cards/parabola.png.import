@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfmuon0xp1ej7"
-path="res://.godot/imported/archimedean-spiral-card.png-63df155a4c9d48e567f553b247ddac41.ctex"
+uid="uid://dfa8ksj8hyjem"
+path="res://.godot/imported/parabola.png-64d4b7f53bb39fea7f1e229bbce44889.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/archimedean-spiral-card.png"
-dest_files=["res://.godot/imported/archimedean-spiral-card.png-63df155a4c9d48e567f553b247ddac41.ctex"]
+source_file="res://assets/sprites/cards/parabola.png"
+dest_files=["res://.godot/imported/parabola.png-64d4b7f53bb39fea7f1e229bbce44889.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3sbq73vegj5p"
-path="res://.godot/imported/parabola_card.png-65f1e288f5df55031ef7e6780ed7388e.ctex"
+uid="uid://cuo4c78tms284"
+path="res://.godot/imported/singularity.png-210fe09cd6a1878152454282176c1339.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/parabola_card.png"
-dest_files=["res://.godot/imported/parabola_card.png-65f1e288f5df55031ef7e6780ed7388e.ctex"]
+source_file="res://assets/sprites/cards/singularity.png"
+dest_files=["res://.godot/imported/singularity.png-210fe09cd6a1878152454282176c1339.ctex"]
 
 [params]
 

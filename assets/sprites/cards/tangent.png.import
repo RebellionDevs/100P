@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hbjygn1yl51n"
-path="res://.godot/imported/beurnulli_card.png-714664d8ccd04f290de1cb4238201704.ctex"
+uid="uid://dvgfhj08nku6q"
+path="res://.godot/imported/tangent.png-3443ce15689e315f8060458eb8156531.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/beurnulli_card.png"
-dest_files=["res://.godot/imported/beurnulli_card.png-714664d8ccd04f290de1cb4238201704.ctex"]
+source_file="res://assets/sprites/cards/tangent.png"
+dest_files=["res://.godot/imported/tangent.png-3443ce15689e315f8060458eb8156531.ctex"]
 
 [params]
 

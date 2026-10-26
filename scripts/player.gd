@@ -9,19 +9,48 @@ extends Node2D
 @onready var muzzle: Marker2D = $GunPivot/Muzzle
 @onready var trajectory_line: Line2D = $TrajectoryLine
 
+func can_shoot() -> bool:
+	var ui = get_tree().current_scene.find_child("CardSelectionUI", true, false)
+	if ui and ui.visible:
+		return false
+	return GameManager.current_state == GameManager.State.PLAYER_TURN or GameManager.current_state == GameManager.State.WAITING_FOR_CARD
+
 func _process(_delta: float) -> void:
-	var mouse_pos = get_global_mouse_position()
+	if not can_shoot() or not is_mouse_in_bounds():
+		trajectory_line.points = []
+		return
 	
+	var mouse_pos = get_global_mouse_position()
 	var direction = mouse_pos - global_position
 	gun_pivot.rotation = direction.angle() + PI
 	
 	update_trajectory()
 
+func is_mouse_in_bounds() -> bool:
+	var space_state = get_world_2d().direct_space_state
+	var point_query = PhysicsPointQueryParameters2D.new()
+	point_query.position = get_global_mouse_position()
+	point_query.collide_with_areas = true
+	
+	var results = space_state.intersect_point(point_query)
+	for res in results:
+		var collider = res.collider
+		if collider and collider.is_in_group("level_bounds"):
+			return true
+	return false
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		shoot()
-		
+		if not is_mouse_in_bounds():
+			return
+			
+		if GameManager.current_state == GameManager.State.PLAYER_TURN:
+			shoot()
+		elif GameManager.current_state == GameManager.State.WAITING_FOR_CARD:
+			shoot_new_bullet_and_reshuffle()
+
 func update_trajectory() -> void:
+	var space_state = get_world_2d().direct_space_state
 	var points: Array[Vector2] = []
 	var current_pos = muzzle.global_position
 	var mouse_pos = get_global_mouse_position()
@@ -30,13 +59,11 @@ func update_trajectory() -> void:
 	
 	points.append(to_local(muzzle.global_position)) 
 	
-	var space_state = get_world_2d().direct_space_state
-	
 	for i in range(max_prediction):
 		var target_pos = current_pos + current_velocity.normalized() * 2000.0
 		
-		var query = PhysicsRayQueryParameters2D.create(current_pos, target_pos)
-		var result = space_state.intersect_ray(query)
+		var ray_query = PhysicsRayQueryParameters2D.create(current_pos, target_pos)
+		var result = space_state.intersect_ray(ray_query)
 		
 		if result:
 			var hit_pos = result.position
@@ -60,6 +87,41 @@ func update_trajectory() -> void:
 	trajectory_line.points = points
 
 func shoot() -> void:
+	if not bullet_scene or GameManager.current_state != GameManager.State.PLAYER_TURN:
+		return
+		
+	if GameManager.active_bullet and is_instance_valid(GameManager.active_bullet):
+		GameManager.active_bullet.queue_free()
+	GameManager.active_bullet = null
+	GameManager.has_frozen_bullet = false
+		
+	var bullet = bullet_scene.instantiate() as CharacterBody2D
+	bullet.add_to_group("player_bullet")
+	if not bullet:
+		return
+		
+	bullet.global_position = muzzle.global_position
+	
+	var mouse_pos = get_global_mouse_position()
+	var direction = (mouse_pos - muzzle.global_position).normalized()
+	bullet.velocity = direction * shoot_speed
+	
+	get_tree().current_scene.add_child(bullet)
+	GameManager.current_state = GameManager.State.BULLET_FLYING
+
+func shoot_new_bullet_and_reshuffle() -> void:
+	if GameManager.current_state != GameManager.State.WAITING_FOR_CARD:
+		return
+		
+	if GameManager.active_bullet and is_instance_valid(GameManager.active_bullet):
+		GameManager.active_bullet.queue_free()
+	
+	GameManager.active_bullet = null
+	GameManager.has_frozen_bullet = false
+	
+	GameManager.discard_current_hand()
+	GameManager.draw_hand()
+	
 	if not bullet_scene:
 		return
 		
@@ -75,3 +137,4 @@ func shoot() -> void:
 	bullet.velocity = direction * shoot_speed
 	
 	get_tree().current_scene.add_child(bullet)
+	GameManager.current_state = GameManager.State.BULLET_FLYING

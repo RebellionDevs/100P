@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eky755426qgl"
-path="res://.godot/imported/folium_of_descartes.png-a15c7c67437d03c6960434cdb5aad27b.ctex"
+uid="uid://btf1oitn58ba0"
+path="res://.godot/imported/archimedean.png-194b237daf06ea02b37b75ce0c18586c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/folium_of_descartes.png"
-dest_files=["res://.godot/imported/folium_of_descartes.png-a15c7c67437d03c6960434cdb5aad27b.ctex"]
+source_file="res://assets/sprites/cards/archimedean.png"
+dest_files=["res://.godot/imported/archimedean.png-194b237daf06ea02b37b75ce0c18586c.ctex"]
 
 [params]
 

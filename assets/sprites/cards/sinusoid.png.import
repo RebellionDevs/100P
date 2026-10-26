@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3j88k0a1nnr4"
-path="res://.godot/imported/singularity-card-description.png-6a606abd85e238b8d1fd00e632b49e59.ctex"
+uid="uid://bpmdv06nchnyy"
+path="res://.godot/imported/sinusoid.png-9b09fdeaedf02c121bdeec8fc1c818d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/singularity-card-description.png"
-dest_files=["res://.godot/imported/singularity-card-description.png-6a606abd85e238b8d1fd00e632b49e59.ctex"]
+source_file="res://assets/sprites/cards/sinusoid.png"
+dest_files=["res://.godot/imported/sinusoid.png-9b09fdeaedf02c121bdeec8fc1c818d7.ctex"]
 
 [params]
 

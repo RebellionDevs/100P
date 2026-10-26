@@ -16,6 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://c5016t0wy72gi" path="res://assets/sprites/pick_card_button_inactive.png" id="14_rysoc"]
 [ext_resource type="Texture2D" uid="uid://cam2wb4g41pey" path="res://assets/sprites/pick_card_button_active.png" id="15_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://ceougp2ab1fcq" path="res://assets/sprites/pick_card_button_active_2.png" id="16_264po"]
+[ext_resource type="Texture2D" uid="uid://b1vvh62qcaq77" path="res://assets/sprites/pick_card_button_hover.png" id="17_1kice"]
+[ext_resource type="Shader" uid="uid://dpjodkk354h2v" path="res://assets/blur.gdshader" id="17_rysoc"]
+[ext_resource type="Script" uid="uid://bb62u6uku887o" path="res://scripts/card_selection_ui.gd" id="17_ssvqc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rysoc"]
+shader = ExtResource("17_rysoc")
+shader_parameter/blur_amount = 2.5
 
 [node name="Game" type="Node2D" unique_id=1915535653]
 script = ExtResource("1_yqjtg")
@@ -94,9 +101,9 @@ theme_override_font_sizes/font_size = 36
 text = "TEST TEST TEST"
 
 [node name="CardLeft" type="Label" parent="UI" unique_id=1050519130]
-offset_left = 38.0
+offset_left = 29.0
 offset_top = 386.0
-offset_right = 253.0
+offset_right = 244.0
 offset_bottom = 432.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_gee14")
@@ -105,9 +112,9 @@ text = "Cards left: "
 
 [node name="TextureRect" type="TextureRect" parent="UI/CardLeft" unique_id=1024835854]
 layout_mode = 0
-offset_left = 262.0
+offset_left = 286.0
 offset_top = -30.0
-offset_right = 339.0
+offset_right = 363.0
 offset_bottom = 81.0
 texture = ExtResource("10_vtaks")
 script = ExtResource("11_kvpfn")
@@ -122,4 +129,20 @@ scale = Vector2(1.5, 1.5)
 script = ExtResource("13_kvuet")
 inactive_texture = ExtResource("14_rysoc")
 normal_frames = Array[Texture2D]([ExtResource("15_ssvqc"), ExtResource("16_264po")])
+hover_frames = Array[Texture2D]([ExtResource("17_1kice")])
 metadata/_custom_type_script = "uid://cgese1cmjyqv"
+
+[node name="CardSelectionUI" type="Control" parent="UI" unique_id=249623647]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1600.0
+offset_bottom = 900.0
+script = ExtResource("17_ssvqc")
+
+[node name="BlurOverlay" type="ColorRect" parent="UI/CardSelectionUI" unique_id=178207484]
+visible = false
+material = SubResource("ShaderMaterial_rysoc")
+layout_mode = 0
+offset_right = 1600.0
+offset_bottom = 900.0

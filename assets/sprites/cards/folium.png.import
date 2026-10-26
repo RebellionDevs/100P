@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8djg10mhslvc"
-path="res://.godot/imported/sinusoid-card.png-b2bbdf3a1b5d18b1bb93717189c47823.ctex"
+uid="uid://c1kckm63351br"
+path="res://.godot/imported/folium.png-fb68ec266b23eabf8f0dbc11dd66e472.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/sinusoid-card.png"
-dest_files=["res://.godot/imported/sinusoid-card.png-b2bbdf3a1b5d18b1bb93717189c47823.ctex"]
+source_file="res://assets/sprites/cards/folium.png"
+dest_files=["res://.godot/imported/folium.png-fb68ec266b23eabf8f0dbc11dd66e472.ctex"]
 
 [params]
 
