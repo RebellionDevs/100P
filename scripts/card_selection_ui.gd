@@ -77,5 +77,15 @@ func _on_blur_gui_input(event: InputEvent) -> void:
 		hide_cards()
 
 func _on_card_left_clicked(card_name: String) -> void:
-	print("Выбрана карта: ", card_name)
 	hide_cards()
+	
+	GameManager.discard_current_hand()
+	GameManager.draw_hand()
+	
+	GameManager.selected_card = card_name
+	GameManager.current_state = GameManager.State.AIMING_CARD_SHOT
+	
+	var player = get_tree().current_scene.find_child("Player", true, false)
+	if player:
+		player.singularity_point_set = false
+		player.card_param = 1.0

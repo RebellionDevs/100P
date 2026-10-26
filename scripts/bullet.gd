@@ -1,57 +1,45 @@
 class_name Bullet
 extends CharacterBody2D
 
-@export var speed: float = 600.0
-@export var max_bounces: int = 5
-
-var bounce_count: int = 0
+var path_points: PackedVector2Array = []
+var current_point_index: int = 1
+var move_speed: float = 1700.0
+var is_following_path: bool = false
 var is_frozen: bool = false
-var current_function_mode: String = ""
+var ends_on_wall: bool = false
+var is_under_function: bool = true
 
-func _ready() -> void:
-	add_to_group("bullet")
+func setup_path(points: PackedVector2Array, speed: float, hits_wall_at_end: bool) -> void:
+	path_points = points
+	move_speed = speed
+	ends_on_wall = hits_wall_at_end
+	current_point_index = 1
+	is_following_path = true
+	is_frozen = false
+	is_under_function = true
 
 func _physics_process(delta: float) -> void:
-	if is_frozen:
+	if is_frozen or not is_following_path:
 		return
 		
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		_handle_collision(collision)
-
-func _handle_collision(collision: KinematicCollision2D) -> void:
-	var collider = collision.get_collider()
-	var normal = collision.get_normal()
-	
-	if collider:
-		if collider.is_in_group("function_wall"):
-			_freeze_in_wall(collision)
-			return
-
-		if collider.is_in_group("enemy"):
-			collider.queue_free()
+	if path_points.is_empty() or current_point_index >= path_points.size():
+		if ends_on_wall:
+			is_frozen = true
+			velocity = Vector2.ZERO
+			# Корректно передаем попадание в синюю стену функций
+			GameManager.on_bullet_hit_function_wall(self, global_position)
+		else:
 			queue_free()
 			GameManager.on_bullet_destroyed()
-			return
-
-	bounce_count += 1
-	if bounce_count > max_bounces:
-		queue_free()
-		GameManager.on_bullet_destroyed()
 		return
+		
+	var target_pos = path_points[current_point_index]
+	var direction = target_pos - global_position
+	var distance = direction.length()
+	var step = move_speed * delta
 	
-	velocity = velocity.bounce(normal)
-
-func _freeze_in_wall(collision: KinematicCollision2D) -> void:
-	is_frozen = true
-	velocity = Vector2.ZERO
-	global_position = collision.get_position()
-	
-	GameManager.on_bullet_hit_function_wall(self, global_position)
-
-func unfreeze_with_function(card_name: String, new_direction: Vector2) -> void:
-	current_function_mode = card_name
-	bounce_count = 0
-	is_frozen = false
-	
-	velocity = new_direction.normalized() * speed
+	if distance <= step:
+		global_position = target_pos
+		current_point_index += 1
+	else:
+		global_position += direction.normalized() * step

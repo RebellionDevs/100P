@@ -1,10 +1,11 @@
 extends Node
 
-enum State { PLAYER_TURN, BULLET_FLYING, WAITING_FOR_CARD, ENEMY_TURN }
+enum State { PLAYER_TURN, BULLET_FLYING, AIMING_CARD_SHOT, WAITING_FOR_CARD, ENEMY_TURN }
 var current_state: State = State.PLAYER_TURN
 
 var active_bullet: Node2D = null
 var has_frozen_bullet: bool = false
+var selected_card: String = ""
 
 var deck: Array[String] = []
 var discard_pile: Array[String] = []
