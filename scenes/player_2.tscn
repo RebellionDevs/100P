@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://rub37kwk3kt6"]
 
 [ext_resource type="Script" uid="uid://c1s7o2p43v2vj" path="res://scripts/player_2.gd" id="1_yjax8"]
+[ext_resource type="PackedScene" uid="uid://dtclgpudk4ih3" path="res://scenes/bullet.tscn" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://b6rhxo6reea7" path="res://assets/sprites/player_skin_1.png" id="3_v7tvf"]
 [ext_resource type="Texture2D" uid="uid://c5a0g4wekbj2w" path="res://assets/sprites/pistol.png" id="4_povjg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hh6ca"]
 radius = 1.0
 
-[node name="Player" type="StaticBody2D" unique_id=248845660 groups=["player"]]
+[node name="Player" type="StaticBody2D" unique_id=248845660 groups=["player", "player_2"]]
 script = ExtResource("1_yjax8")
+bullet_scene = ExtResource("2_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2146723943]
 position = Vector2(-0.1870799, 0.06235981)

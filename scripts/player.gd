@@ -230,10 +230,11 @@ func shoot() -> void:
 	GameManager.has_frozen_bullet = false
 		
 	var bullet = bullet_scene.instantiate() as CharacterBody2D
-	bullet.add_to_group("player_bullet")
-	bullet.add_to_group("bullet")
 	if not bullet:
 		return
+
+	bullet.add_to_group("player_bullet")
+	bullet.add_to_group("bullet")
 		
 	bullet.global_position = muzzle.global_position
 	bullet.setup_path(current_path, shoot_speed, false, false)
