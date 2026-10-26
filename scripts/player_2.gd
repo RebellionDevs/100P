@@ -24,9 +24,25 @@ func _process(_delta: float) -> void:
 		trajectory_line.clear_points()
 		return
 	
+	if not is_mouse_in_bounds():
+		trajectory_line.clear_points()
+		return
+
 	var mouse_pos = get_global_mouse_position()
-	gun_pivot.rotation = (mouse_pos - global_position).angle() + PI
+	gun_pivot.rotation = (mouse_pos - global_position).angle()
 	update_normal_trajectory()
+
+func is_mouse_in_bounds() -> bool:
+	var space_state = get_world_2d().direct_space_state
+	var point_query = PhysicsPointQueryParameters2D.new()
+	point_query.position = get_global_mouse_position()
+	point_query.collide_with_areas = true
+
+	for result in space_state.intersect_point(point_query):
+		var collider = result.collider
+		if collider and collider.is_in_group("level_bounds"):
+			return true
+	return false
 
 func update_normal_trajectory() -> void:
 	var space_state = get_world_2d().direct_space_state
@@ -81,13 +97,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 		
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		shoot()
+		if is_mouse_in_bounds():
+			shoot()
 
 func shoot() -> void:
-	if not bullet_scene:
+	if not bullet_scene or not can_shoot():
 		return
 		
 	var bullet = bullet_scene.instantiate() as CharacterBody2D
+	if not bullet:
+		return
+
 	bullet.add_to_group("player_2_bullet")
 	bullet.add_to_group("bullet")
 	

@@ -89,12 +89,15 @@ func discard_current_hand() -> void:
 	hand.clear()
 
 func on_bullet_hit_function_wall(bullet: Node2D, collision_pos: Vector2) -> void:
-	if active_player == 1:
-		p1_active_bullet = bullet
-		current_state = State.WAITING_FOR_CARD_P1
-	else:
-		p2_active_bullet = bullet
-		current_state = State.WAITING_FOR_CARD_P2
+	if bullet == p1_active_bullet:
+		p1_active_bullet = null
+	elif bullet == p2_active_bullet:
+		p2_active_bullet = null
+
+	if is_instance_valid(bullet):
+		bullet.queue_free()
+
+	advance_turn_order()
 
 func on_bullet_destroyed() -> void:
 	advance_turn_order()
@@ -102,16 +105,7 @@ func on_bullet_destroyed() -> void:
 func advance_turn_order() -> void:
 	if current_state == State.GAME_OVER:
 		return
-		
-	if p1_active_bullet != null:
-		current_state = State.WAITING_FOR_CARD_P1
-		active_player = 1
-		return
-	if p2_active_bullet != null:
-		current_state = State.WAITING_FOR_CARD_P2
-		active_player = 2
-		return
-		
+
 	if active_player == 1:
 		active_player = 2
 		current_state = State.PLAYER_2_TURN
