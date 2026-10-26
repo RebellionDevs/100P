@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bxnhwjfekpds0"]
+
+[ext_resource type="Script" uid="uid://dpkivutlc2n37" path="res://scripts/game_over.gd" id="1_wqhvx"]
+[ext_resource type="Texture2D" uid="uid://c6mv6nmc0w08" path="res://assets/sprites/game_over_win.png" id="1_xeevv"]
+[ext_resource type="Shader" uid="uid://dpjodkk354h2v" path="res://assets/blur.gdshader" id="2_tbwuq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqhvx"]
+shader = ExtResource("2_tbwuq")
+shader_parameter/blur_amount = 0.9
+
+[node name="GameOverUI" type="Control" unique_id=2037674519]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wqhvx")
+
+[node name="BlurOverlay" type="ColorRect" parent="." unique_id=164287685]
+material = SubResource("ShaderMaterial_wqhvx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=938681647]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -331.0
+offset_top = -106.5
+offset_right = 331.0
+offset_bottom = 106.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xeevv")

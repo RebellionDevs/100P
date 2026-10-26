@@ -45,7 +45,7 @@ func init_deck() -> void:
 
 func draw_hand() -> void:
 	if deck.is_empty() and discard_pile.is_empty() and hand.is_empty():
-		trigger_game_over("Карты в колоде окончательно кончились!")
+		trigger_game_over("defeat")
 		return
 
 	hand.clear()
@@ -78,13 +78,13 @@ func take_player_damage(amount: int) -> void:
 	player_hp = max(0, player_hp - amount)
 	update_ui_health()
 	if player_hp <= 0:
-		trigger_game_over("Твое ХП кончилось. Поражение!")
+		trigger_game_over("defeat")
 
 func take_enemy_damage(amount: int) -> void:
 	enemy_hp = max(0, enemy_hp - amount)
 	update_ui_health()
 	if enemy_hp <= 0:
-		trigger_game_over("ХП противника кончилось. Победа!")
+		trigger_game_over("win")
 
 func update_ui_health() -> void:
 	var tree = get_tree()
@@ -102,8 +102,11 @@ func trigger_game_over(reason: String) -> void:
 	current_state = State.GAME_OVER
 	
 	var end_ui = get_tree().current_scene.find_child("GameOverUI", true, false)
-	if end_ui and end_ui.has_method("show"):
-		end_ui.show()
+	if end_ui:
+		if end_ui.has_method("show_game_over"):
+			end_ui.show_game_over(reason)
+		elif end_ui.has_method("show"):
+			end_ui.show()
 
 func start_enemy_turn() -> void:
 	current_state = State.ENEMY_TURN

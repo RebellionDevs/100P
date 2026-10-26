@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b1vvh62qcaq77" path="res://assets/sprites/pick_card_button_hover.png" id="17_1kice"]
 [ext_resource type="Shader" uid="uid://dpjodkk354h2v" path="res://assets/blur.gdshader" id="17_rysoc"]
 [ext_resource type="Script" uid="uid://bb62u6uku887o" path="res://scripts/card_selection_ui.gd" id="17_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://bxnhwjfekpds0" path="res://scenes/game_over.tscn" id="20_1kice"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rysoc"]
 shader = ExtResource("17_rysoc")
@@ -144,3 +145,5 @@ material = SubResource("ShaderMaterial_rysoc")
 layout_mode = 0
 offset_right = 1600.0
 offset_bottom = 900.0
+
+[node name="GameOverUI" parent="UI" unique_id=2037674519 instance=ExtResource("20_1kice")]
