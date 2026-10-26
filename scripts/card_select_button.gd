@@ -8,7 +8,7 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 
 func _process(delta: float) -> void:
-	var target_state = GameManager.State.WAITING_FOR_CARD_P1 if player_id == 1 else GameManager.State.WAITING_FOR_CARD_P2
+	var target_state = GameManager.State.WAITING_FOR_CARD_P1 if GameManager.active_player == 1 else GameManager.State.WAITING_FOR_CARD_P2
 	var is_active = (GameManager.current_state == target_state)
 	
 	disabled = not is_active
@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 	super._process(delta)
 
 func _on_pressed() -> void:
-	var target_state = GameManager.State.WAITING_FOR_CARD_P1 if player_id == 1 else GameManager.State.WAITING_FOR_CARD_P2
+	var target_state = GameManager.State.WAITING_FOR_CARD_P1 if GameManager.active_player == 1 else GameManager.State.WAITING_FOR_CARD_P2
 	if GameManager.current_state != target_state:
 		return
 		

@@ -4,6 +4,7 @@ enum State {
 	PLAYER_1_TURN, 
 	PLAYER_2_TURN, 
 	BULLET_FLYING,
+	ENEMY_TURN,
 	WAITING_FOR_CARD_P1, 
 	WAITING_FOR_CARD_P2, 
 	AIMING_CARD_SHOT_P1, 
@@ -29,6 +30,7 @@ var has_frozen_bullet: bool:
 		return (p1_active_bullet != null) or (p2_active_bullet != null)
 
 var active_player: int = 1
+var is_enemy_bullet_flying: bool = false
 var selected_card: String = ""
 
 var p1_max_hp: int = 3
@@ -89,15 +91,20 @@ func discard_current_hand() -> void:
 	hand.clear()
 
 func on_bullet_hit_function_wall(bullet: Node2D, collision_pos: Vector2) -> void:
-	if bullet == p1_active_bullet:
-		p1_active_bullet = null
-	elif bullet == p2_active_bullet:
-		p2_active_bullet = null
+	if not is_instance_valid(bullet):
+		return
 
-	if is_instance_valid(bullet):
-		bullet.queue_free()
-
-	advance_turn_order()
+	if bullet.is_in_group("player_1_bullet"):
+		active_player = 1
+		p1_active_bullet = bullet
+		current_state = State.WAITING_FOR_CARD_P1
+	elif bullet.is_in_group("player_2_bullet"):
+		active_player = 2
+		p2_active_bullet = bullet
+		current_state = State.WAITING_FOR_CARD_P2
+	else:
+		is_enemy_bullet_flying = false
+		advance_turn_order()
 
 func on_bullet_destroyed() -> void:
 	advance_turn_order()
@@ -139,11 +146,11 @@ func update_ui_health() -> void:
 	var tree = get_tree()
 	if not tree: return
 	
-	var p1_ui = tree.current_scene.find_child("Player1Health", true, false)
+	var p1_ui = tree.current_scene.find_child("PlayerHealth", true, false)
 	if p1_ui and p1_ui.has_method("update_health"):
 		p1_ui.update_health(p1_hp)
 		
-	var p2_ui = tree.current_scene.find_child("Player2Health", true, false)
+	var p2_ui = tree.current_scene.find_child("EnemyHealth", true, false)
 	if p2_ui and p2_ui.has_method("update_health"):
 		p2_ui.update_health(p2_hp)
 

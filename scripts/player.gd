@@ -227,7 +227,6 @@ func shoot() -> void:
 	if GameManager.active_bullet and is_instance_valid(GameManager.active_bullet):
 		GameManager.active_bullet.queue_free()
 	GameManager.active_bullet = null
-	GameManager.has_frozen_bullet = false
 		
 	var bullet = bullet_scene.instantiate() as CharacterBody2D
 	if not bullet:
@@ -255,7 +254,6 @@ func shoot_from_wall() -> void:
 		bullet.setup_path(current_path, shoot_speed, path_ends_on_function_wall, true)
 		
 	GameManager.active_bullet = null
-	GameManager.has_frozen_bullet = false
 	GameManager.selected_card = ""
 	singularity_point_set = false
 	card_param = 1.0

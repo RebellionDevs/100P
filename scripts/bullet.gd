@@ -18,6 +18,10 @@ func setup_path(points: PackedVector2Array, speed: float, hits_wall_at_end: bool
 	is_frozen = false
 	is_under_function = under_func
 
+func unfreeze_with_function(_card_type: String, _new_direction: Vector2) -> void:
+	is_frozen = false
+	is_following_path = true
+
 func _physics_process(delta: float) -> void:
 	if is_frozen or not is_following_path:
 		return
