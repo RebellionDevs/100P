@@ -7,16 +7,16 @@ var move_speed: float = 1700.0
 var is_following_path: bool = false
 var is_frozen: bool = false
 var ends_on_wall: bool = false
-var is_under_function: bool = true
+var is_under_function: bool = false
 
-func setup_path(points: PackedVector2Array, speed: float, hits_wall_at_end: bool) -> void:
+func setup_path(points: PackedVector2Array, speed: float, hits_wall_at_end: bool, under_func: bool = false) -> void:
 	path_points = points
 	move_speed = speed
 	ends_on_wall = hits_wall_at_end
 	current_point_index = 1
 	is_following_path = true
 	is_frozen = false
-	is_under_function = true
+	is_under_function = under_func
 
 func _physics_process(delta: float) -> void:
 	if is_frozen or not is_following_path:
@@ -40,11 +40,16 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(direction.normalized() * step)
 	if collision:
 		var collider = collision.get_collider()
-		if collider and collider.is_in_group("function_wall"):
-			is_frozen = true
-			velocity = Vector2.ZERO
-			GameManager.on_bullet_hit_function_wall(self, collision.get_position())
-			return
+		if collider:
+			if collider.is_in_group("function_wall"):
+				is_frozen = true
+				velocity = Vector2.ZERO
+				GameManager.on_bullet_hit_function_wall(self, collision.get_position())
+				return
+			elif collider.is_in_group("player") or collider.is_in_group("enemy"):
+				GameManager.handle_bullet_hit_entity(self, collider)
+				queue_free()
+				return
 	
 	if distance <= step:
 		global_position = target_pos

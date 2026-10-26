@@ -235,7 +235,7 @@ func shoot() -> void:
 		return
 		
 	bullet.global_position = muzzle.global_position
-	bullet.setup_path(current_path, shoot_speed, false)
+	bullet.setup_path(current_path, shoot_speed, false, false)
 	
 	get_tree().current_scene.add_child(bullet)
 	GameManager.current_state = GameManager.State.BULLET_FLYING
@@ -250,7 +250,7 @@ func shoot_from_wall() -> void:
 		if GameManager.selected_card == "Singularity":
 			bullet.global_position = singularity_pos
 			
-		bullet.setup_path(current_path, shoot_speed, path_ends_on_function_wall)
+		bullet.setup_path(current_path, shoot_speed, path_ends_on_function_wall, true)
 		
 	GameManager.active_bullet = null
 	GameManager.has_frozen_bullet = false
