@@ -2,7 +2,7 @@ class_name Player
 extends Node2D
 
 @export var bullet_scene: PackedScene
-@export var shoot_speed: float = 700.0
+@export var shoot_speed: float = 1700.0
 @export var max_prediction: int = 5
 
 @onready var gun_pivot: Node2D = $GunPivot
@@ -64,6 +64,7 @@ func shoot() -> void:
 		return
 		
 	var bullet = bullet_scene.instantiate() as CharacterBody2D
+	bullet.add_to_group("player_bullet")
 	if not bullet:
 		return
 		

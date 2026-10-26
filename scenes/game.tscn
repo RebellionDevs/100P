@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://xgstx3b6tlbq" path="res://assets/sprites/card_icon.png" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://bdhbnwmnpyok2" path="res://scripts/texture_rect.gd" id="11_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://drfm7g5ccxcv4" path="res://assets/sprites/card_icon_2.png" id="12_dinhu"]
+[ext_resource type="Script" uid="uid://c3n628y51lfp0" path="res://scripts/card_select_button.gd" id="13_kvuet"]
+[ext_resource type="Texture2D" uid="uid://c5016t0wy72gi" path="res://assets/sprites/pick_card_button_inactive.png" id="14_rysoc"]
+[ext_resource type="Texture2D" uid="uid://cam2wb4g41pey" path="res://assets/sprites/pick_card_button_active.png" id="15_ssvqc"]
+[ext_resource type="Texture2D" uid="uid://ceougp2ab1fcq" path="res://assets/sprites/pick_card_button_active_2.png" id="16_264po"]
 
 [node name="Game" type="Node2D" unique_id=1915535653]
 script = ExtResource("1_yqjtg")
@@ -108,3 +112,14 @@ offset_bottom = 81.0
 texture = ExtResource("10_vtaks")
 script = ExtResource("11_kvpfn")
 frames = Array[Texture2D]([ExtResource("10_vtaks"), ExtResource("12_dinhu")])
+
+[node name="CardSelectButton" type="TextureButton" parent="UI" unique_id=389606185]
+offset_left = 7.0
+offset_top = 717.0
+offset_right = 47.0
+offset_bottom = 757.0
+scale = Vector2(1.5, 1.5)
+script = ExtResource("13_kvuet")
+inactive_texture = ExtResource("14_rysoc")
+normal_frames = Array[Texture2D]([ExtResource("15_ssvqc"), ExtResource("16_264po")])
+metadata/_custom_type_script = "uid://cgese1cmjyqv"
