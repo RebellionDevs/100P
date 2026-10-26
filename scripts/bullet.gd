@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 		if ends_on_wall:
 			is_frozen = true
 			velocity = Vector2.ZERO
-			# Корректно передаем попадание в синюю стену функций
 			GameManager.on_bullet_hit_function_wall(self, global_position)
 		else:
 			queue_free()
@@ -36,10 +35,17 @@ func _physics_process(delta: float) -> void:
 	var target_pos = path_points[current_point_index]
 	var direction = target_pos - global_position
 	var distance = direction.length()
-	var step = move_speed * delta
+	var step = min(move_speed * delta, distance)
+	
+	var collision = move_and_collide(direction.normalized() * step)
+	if collision:
+		var collider = collision.get_collider()
+		if collider and collider.is_in_group("function_wall"):
+			is_frozen = true
+			velocity = Vector2.ZERO
+			GameManager.on_bullet_hit_function_wall(self, collision.get_position())
+			return
 	
 	if distance <= step:
 		global_position = target_pos
 		current_point_index += 1
-	else:
-		global_position += direction.normalized() * step
