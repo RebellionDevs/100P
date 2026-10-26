@@ -10,6 +10,17 @@
 [ext_resource type="Texture2D" uid="uid://du80bb6lm6try" path="res://assets/sprites/settings_button_2.png" id="8_lgwnu"]
 [ext_resource type="Texture2D" uid="uid://c64propvvhpaa" path="res://assets/sprites/settings_button_hover.png" id="9_flqon"]
 [ext_resource type="Texture2D" uid="uid://bfcb3u4oy4lh2" path="res://assets/sprites/settings_button_hover_2.png" id="10_rcqid"]
+[ext_resource type="Texture2D" uid="uid://cmrga3tfg6cdn" path="res://assets/sprites/logo/logo_1.png" id="11_flqon"]
+[ext_resource type="Script" uid="uid://bwocyc100lrhq" path="res://scripts/logo.gd" id="11_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://d0n7bk5xm5ufb" path="res://assets/sprites/logo/logo_2.png" id="13_gw5y6"]
+[ext_resource type="Texture2D" uid="uid://e3om1y7mq4rf" path="res://assets/sprites/logo/logo_3.png" id="14_svtp6"]
+[ext_resource type="Texture2D" uid="uid://nbfbuvuivvuv" path="res://assets/sprites/logo/logo_4.png" id="15_1dfpl"]
+[ext_resource type="Texture2D" uid="uid://b0cekipomf24b" path="res://assets/sprites/logo/logo_5.png" id="16_qywvv"]
+[ext_resource type="Texture2D" uid="uid://xr4gs8lkn3fb" path="res://assets/sprites/logo/logo_6.png" id="17_3wgol"]
+[ext_resource type="Texture2D" uid="uid://ibxjyl1n1n3e" path="res://assets/sprites/logo/logo_7.png" id="18_1acrt"]
+[ext_resource type="Texture2D" uid="uid://do042ee3rhyuj" path="res://assets/sprites/logo/logo_8.png" id="19_vr8o3"]
+[ext_resource type="Texture2D" uid="uid://d1roonw7x7ssv" path="res://assets/sprites/logo/logo_9.png" id="20_1a85y"]
+[ext_resource type="Texture2D" uid="uid://cq3brs24gioky" path="res://assets/sprites/logo/logo_10.png" id="21_hl5e0"]
 
 [node name="Control" type="Control" unique_id=416109375]
 layout_mode = 3
@@ -55,3 +66,14 @@ offset_top = 530.0
 offset_right = 126.0
 offset_bottom = 584.0
 text = "Return"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1980343776]
+layout_mode = 0
+offset_left = 748.0
+offset_top = 46.0
+offset_right = 1525.7898
+offset_bottom = 500.0
+texture = ExtResource("11_flqon")
+script = ExtResource("11_lgwnu")
+logo_frames = Array[Texture2D]([ExtResource("11_flqon"), ExtResource("13_gw5y6"), ExtResource("14_svtp6"), ExtResource("15_1dfpl"), ExtResource("16_qywvv"), ExtResource("17_3wgol"), ExtResource("18_1acrt"), ExtResource("19_vr8o3"), ExtResource("20_1a85y"), ExtResource("21_hl5e0")])
+change_interval = 0.1

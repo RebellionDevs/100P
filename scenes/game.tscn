@@ -2,6 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://byop1bjfun2tx" path="res://assets/sprites/background.png" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://d4mywpr5tytwv" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://dryywwoixpc" path="res://assets/sprites/frame.png" id="3_0tnpc"]
+[ext_resource type="Script" uid="uid://cv4asrr6wuluv" path="res://scripts/player_health.gd" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://mlx6aiv6pnji" path="res://assets/sprites/health_point.png" id="4_iywne"]
+[ext_resource type="Texture2D" uid="uid://d3hx1c5it02ak" path="res://assets/sprites/health_point_empty.png" id="5_p57ef"]
+[ext_resource type="Texture2D" uid="uid://c5jncr7xtu3hs" path="res://assets/sprites/health_point_2.png" id="5_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://beil6p7y5iwn5" path="res://assets/sprites/health_point_empty_2.png" id="7_gee14"]
+[ext_resource type="FontFile" uid="uid://j2ekcpybxtmh" path="res://assets/fonts/Virgil.woff2" id="8_gee14"]
+[ext_resource type="Texture2D" uid="uid://xgstx3b6tlbq" path="res://assets/sprites/card_icon.png" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://bdhbnwmnpyok2" path="res://scripts/texture_rect.gd" id="11_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://drfm7g5ccxcv4" path="res://assets/sprites/card_icon_2.png" id="12_dinhu"]
 
 [node name="Game" type="Node2D" unique_id=1915535653]
 script = ExtResource("1_yqjtg")
@@ -13,3 +23,88 @@ texture = ExtResource("1_uwrxv")
 stretch_mode = 1
 
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1779409398]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2025582642]
+
+[node name="EnemyHealthLabel" type="Label" parent="UI" unique_id=2007637560]
+offset_left = 89.0
+offset_top = 43.0
+offset_right = 357.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 42
+text = "Enemy Health"
+
+[node name="TextureRect" type="TextureRect" parent="UI" unique_id=954322678]
+offset_left = 12.0
+offset_top = 271.0
+offset_right = 408.0
+offset_bottom = 368.0
+texture = ExtResource("3_0tnpc")
+
+[node name="PlayerHealth" type="Control" parent="UI" unique_id=1667335123]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0
+offset_top = 540.0
+offset_right = 77.0
+offset_bottom = 580.0
+script = ExtResource("3_lnu2h")
+heart_full_frames = Array[Texture2D]([ExtResource("4_iywne"), ExtResource("5_u5sy4")])
+heart_empty_frames = Array[Texture2D]([ExtResource("5_p57ef"), ExtResource("7_gee14")])
+heart_size = Vector2(150, 150)
+spacing = -50.0
+
+[node name="PlayerHealthLabel" type="Label" parent="UI" unique_id=568801195]
+offset_left = 99.0
+offset_top = 468.0
+offset_right = 334.0
+offset_bottom = 522.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 42
+text = "Your health"
+
+[node name="EnemyHealth" type="Control" parent="UI" unique_id=1017973841]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0
+offset_top = 118.0
+offset_right = 77.0
+offset_bottom = 158.0
+script = ExtResource("3_lnu2h")
+heart_full_frames = Array[Texture2D]([ExtResource("4_iywne"), ExtResource("5_u5sy4")])
+heart_empty_frames = Array[Texture2D]([ExtResource("5_p57ef"), ExtResource("7_gee14")])
+heart_size = Vector2(150, 150)
+spacing = -50.0
+
+[node name="GameState" type="Label" parent="UI" unique_id=2139842887]
+offset_left = 37.0
+offset_top = 298.0
+offset_right = 385.0
+offset_bottom = 344.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 36
+text = "TEST TEST TEST"
+
+[node name="CardLeft" type="Label" parent="UI" unique_id=1050519130]
+offset_left = 38.0
+offset_top = 386.0
+offset_right = 253.0
+offset_bottom = 432.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 36
+text = "Cards left: "
+
+[node name="TextureRect" type="TextureRect" parent="UI/CardLeft" unique_id=1024835854]
+layout_mode = 0
+offset_left = 262.0
+offset_top = -30.0
+offset_right = 339.0
+offset_bottom = 81.0
+texture = ExtResource("10_vtaks")
+script = ExtResource("11_kvpfn")
+frames = Array[Texture2D]([ExtResource("10_vtaks"), ExtResource("12_dinhu")])
