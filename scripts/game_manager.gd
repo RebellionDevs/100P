@@ -180,13 +180,17 @@ func handle_bullet_hit_entity(bullet: Node2D, collider: Node) -> void:
 		hit_player = 2
 
 	if hit_player != 0:
-		var damage_player = hit_player
-		if bullet is Bullet and bullet.is_under_function:
-			if (bullet.is_in_group("player_1_bullet") and hit_player == 1) or \
-					(bullet.is_in_group("player_2_bullet") and hit_player == 2):
-				damage_player = 2 if hit_player == 1 else 1
+		var shooter_player = 1
+		if bullet.is_in_group("player_2_bullet"):
+			shooter_player = 2
+		
+		var is_func = (bullet is Bullet and bullet.is_under_function)
+		var damage_target = shooter_player
 
-		if damage_player == 1:
+		if is_func and hit_player == shooter_player:
+			damage_target = 2 if shooter_player == 1 else 1
+
+		if damage_target == 1:
 			take_p1_damage(1)
 		else:
 			take_p2_damage(1)

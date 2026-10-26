@@ -5,7 +5,8 @@ extends Node2D
 @onready var card_left_label: Label = $UI/CardLeft
 
 func _ready() -> void:
-	load_level("res://scenes/level_3.tscn")
+	var random_level = randi_range(1, 3)
+	load_level("res://scenes/level_%d.tscn" % random_level)
 
 func _process(delta: float) -> void:
 	match GameManager.current_state:
