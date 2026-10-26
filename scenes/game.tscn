@@ -133,7 +133,6 @@ hover_frames = Array[Texture2D]([ExtResource("17_1kice")])
 metadata/_custom_type_script = "uid://cgese1cmjyqv"
 
 [node name="CardSelectionUI" type="Control" parent="UI" unique_id=249623647]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1600.0
@@ -141,7 +140,6 @@ offset_bottom = 900.0
 script = ExtResource("17_ssvqc")
 
 [node name="BlurOverlay" type="ColorRect" parent="UI/CardSelectionUI" unique_id=178207484]
-visible = false
 material = SubResource("ShaderMaterial_rysoc")
 layout_mode = 0
 offset_right = 1600.0
