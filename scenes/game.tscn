@@ -39,14 +39,14 @@ stretch_mode = 1
 [node name="UI" type="CanvasLayer" parent="." unique_id=2025582642]
 
 [node name="EnemyHealthLabel" type="Label" parent="UI" unique_id=2007637560]
-offset_left = 89.0
+offset_left = 48.0
 offset_top = 43.0
-offset_right = 357.0
+offset_right = 378.0
 offset_bottom = 97.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_gee14")
 theme_override_font_sizes/font_size = 42
-text = "Enemy Health"
+text = "Player 2 Health"
 
 [node name="TextureRect" type="TextureRect" parent="UI" unique_id=954322678]
 offset_left = 12.0
@@ -69,14 +69,14 @@ heart_size = Vector2(150, 150)
 spacing = -50.0
 
 [node name="PlayerHealthLabel" type="Label" parent="UI" unique_id=568801195]
-offset_left = 99.0
-offset_top = 468.0
-offset_right = 334.0
-offset_bottom = 522.0
+offset_left = 48.0
+offset_top = 467.0
+offset_right = 359.0
+offset_bottom = 521.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_gee14")
 theme_override_font_sizes/font_size = 42
-text = "Your health"
+text = "Player 1 Health"
 
 [node name="EnemyHealth" type="Control" parent="UI" unique_id=1017973841]
 layout_mode = 3

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://diogpnw6nc1vc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://cgese1cmjyqv" path="res://scripts/animated_button.gd" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://byop1bjfun2tx" path="res://assets/sprites/background.png" id="2_svtp6"]
 [ext_resource type="Texture2D" uid="uid://cbpmpb2xf03sx" path="res://assets/sprites/play_button.png" id="3_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://dyu74nkum7pdb" path="res://assets/sprites/play_button_2.png" id="4_oa1go"]
 [ext_resource type="Texture2D" uid="uid://bpv14asgo1sdw" path="res://assets/sprites/play_button_hover.png" id="5_tbmy8"]
@@ -29,6 +30,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_l6cm7")
 
+[node name="Background" type="TextureRect" parent="." unique_id=1654306023]
+layout_mode = 0
+offset_right = 1600.0
+offset_bottom = 900.0
+texture = ExtResource("2_svtp6")
+stretch_mode = 1
+
 [node name="PlayButton" type="TextureButton" parent="." unique_id=1559045769]
 layout_mode = 0
 offset_left = 67.0
@@ -41,6 +49,7 @@ hover_frames = Array[Texture2D]([ExtResource("5_tbmy8"), ExtResource("6_jk1qb")]
 frame_interval = 0.5
 
 [node name="SettingsButton" type="TextureButton" parent="." unique_id=1541725738]
+visible = false
 layout_mode = 0
 offset_left = 66.0
 offset_top = 262.0

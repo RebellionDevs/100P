@@ -80,7 +80,7 @@ func init_deck() -> void:
 
 func draw_hand() -> void:
 	if deck.is_empty() and discard_pile.is_empty() and hand.is_empty():
-		trigger_game_over("Game Over (Deck Empty)")
+		trigger_game_over("Draw (Deck Empty)")
 		return
 
 	hand.clear()

@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://s5ad02408w2d"]
+
+[ext_resource type="Texture2D" uid="uid://d0pat7cqvc706" path="res://assets/sprites/level-3.png" id="1_70nk6"]
+[ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://scenes/player_1.tscn" id="2_uwxec"]
+[ext_resource type="PackedScene" uid="uid://rub37kwk3kt6" path="res://scenes/player_2.tscn" id="3_1pn4d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70nk6"]
+size = Vector2(1162.5, 771.5)
+
+[node name="Node2D" type="Node2D" unique_id=81196331]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1925451340]
+position = Vector2(991.4158, 446.9327)
+scale = Vector2(1.27, 1.393)
+texture = ExtResource("1_70nk6")
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1932547741]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls" unique_id=1792385075]
+polygon = PackedVector2Array(1569.5413, 63.478188, 1569.5413, 833.59485, 411.43802, 832.13074, 411.43802, 706.21814, 639.83765, 704.754, 642.76587, 796.9924, 945.8346, 796.9924, 947.2987, 656.4387, 759.89386, 656.4387, 759.89386, 622.7644, 1162.5214, 622.7644, 1162.5214, 653.51056, 970.7243, 653.51056, 970.7243, 804.31287, 1303.0751, 799.92053, 1300.1469, 663.7592, 1528.5465, 665.2233, 1530.0105, 496.8518, 1308.9314, 496.8518, 1310.3955, 471.9621, 1448.021, 471.9621, 1446.5569, 98.6166, 411.43802, 98.6166, 409.97394, 62.01409)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Walls" unique_id=1157399391]
+polygon = PackedVector2Array(409.97394, 98.6166, 411.43802, 706.21814, 448.04053, 704.754, 449.50464, 100.080696)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Walls" unique_id=110240332]
+polygon = PackedVector2Array(587.13007, 545.1671, 585.66595, 296.2701, 872.6296, 296.2701, 953.1551, 94.2243, 1038.0729, 291.8778, 1260.6161, 294.806, 1259.152, 315.3034, 1029.2883, 316.76752, 954.6192, 515.88513, 871.16547, 318.2316, 609.09155, 321.1598, 613.4839, 545.1671)
+
+[node name="Function Walls" type="StaticBody2D" parent="." unique_id=1165929469 groups=["function_wall"]]
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="Function Walls" unique_id=1829807091]
+polygon = PackedVector2Array(977.4833, 801.7219, 974.4043, 654.44556, 1000.0622, 654.44556, 1001.0885, 802.7482)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Function Walls" unique_id=777401652]
+polygon = PackedVector2Array(871.28534, 347.39825, 893.0735, 337.63116, 950.9247, 475.8731, 932.14185, 485.6402)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Function Walls" unique_id=2081643226]
+position = Vector2(-3.00531, 8.264465)
+polygon = PackedVector2Array(595.55304, 404.49814, 613.5846, 417.2705, 670.6845, 317.34564, 648.145, 305.3246)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Function Walls" unique_id=1613728474]
+polygon = PackedVector2Array(844.23816, 297.8114, 935.1473, 82.9354, 953.9302, 94.956436, 862.2698, 307.5785)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Function Walls" unique_id=1643184813]
+polygon = PackedVector2Array(431.76642, 171.59055, 452.80328, 182.86028, 504.64398, 81.43278, 485.1098, 71.66568)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Function Walls" unique_id=1990286821]
+polygon = PackedVector2Array(957.6865, 478.127, 975.7181, 487.14282, 1054.6062, 314.34042, 1029.0614, 306.07596)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="Function Walls" unique_id=972172071]
+polygon = PackedVector2Array(1463.957, 495.87985, 1482.9438, 480.99826, 1548.1149, 567.722, 1533.2333, 583.1167)
+
+[node name="LevelBounds" type="Area2D" parent="." unique_id=755537104 groups=["level_bounds"]]
+
+[node name="level_bounds" type="CollisionShape2D" parent="LevelBounds" unique_id=404490884]
+position = Vector2(997.02356, 451.08154)
+shape = SubResource("RectangleShape2D_70nk6")
+
+[node name="Player_1" parent="." unique_id=248845660 instance=ExtResource("2_uwxec")]
+position = Vector2(896.53687, 754.84796)
+scale = Vector2(50, 50)
+
+[node name="Player_2" parent="." unique_id=1335147796 instance=ExtResource("3_1pn4d")]
+position = Vector2(1084.6539, 248.49496)
+scale = Vector2(50, 50)

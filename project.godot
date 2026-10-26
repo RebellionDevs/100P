@@ -32,6 +32,7 @@ function_wall="allow to use function card"
 enemy=""
 player_2=""
 player_1=""
+level_bounds=""
 
 [physics]
 
