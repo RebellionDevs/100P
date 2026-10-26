@@ -158,11 +158,11 @@ func update_card_trajectory_from_wall() -> void:
 	
 	for i in range(2000):
 		virtual_time += dt
-		apply_card_math(current_velocity, virtual_time, GameManager.selected_card, dt, card_param)
+		current_velocity = apply_card_math(current_velocity, virtual_time, GameManager.selected_card, dt, card_param)
 		
 		var target_pos = current_pos + current_velocity * dt
 		var ray_query = PhysicsRayQueryParameters2D.create(current_pos, target_pos)
-		ray_query.collision_mask = 0xFFFFFFFF # Проверяем все физические слои, где живут стены
+		ray_query.collision_mask = 0xFFFFFFFF
 		var result = space_state.intersect_ray(ray_query)
 		
 		if result:
@@ -170,13 +170,12 @@ func update_card_trajectory_from_wall() -> void:
 			var normal = result.normal
 			var collider = result.collider
 			
-			# Сразу проверяем, не в синюю ли стену функций прилетел луч
 			if collider and collider.is_in_group("function_wall"):
 				full_path.append(hit_pos)
 				if bounce_count < preview_bounces:
 					preview_path.append(hit_pos)
 				path_ends_on_function_wall = true
-				break # Прерываем расчет, путь успешно завершился на стене функций!
+				break
 			
 			full_path.append(hit_pos)
 			if bounce_count < preview_bounces:
@@ -200,25 +199,26 @@ func update_card_trajectory_from_wall() -> void:
 	current_path = full_path
 	trajectory_line.points = preview_path
 
-func apply_card_math(vel: Vector2, t: float, card_name: String, dt: float, param: float) -> void:
+func apply_card_math(vel: Vector2, t: float, card_name: String, dt: float, param: float) -> Vector2:
 	var perp = Vector2(-vel.y, vel.x).normalized()
 	match card_name:
 		"Sinusoid":
-			vel += perp * sin(t * 12.0 * param) * 800.0 * dt
+			vel += perp * sin(t * 15.0 * param) * 3000.0 * dt
 		"Parabola":
-			vel += Vector2(0, 400.0 * param) * dt
+			vel += Vector2(0, 4000.0 * param) * dt
 		"Tangent":
-			var phase = fmod(t * param, 0.6)
-			if phase > 0.28 and phase < 0.32:
-				vel = vel.rotated(deg_to_rad(25.0 * sign(vel.x)))
+			var phase = fmod(t * param, 0.5)
+			if phase > 0.22 and phase < 0.28:
+				vel = vel.rotated(deg_to_rad(45.0 * sign(vel.x)))
 		"Archimedean":
-			vel = vel.rotated(deg_to_rad(90.0 * param) * dt)
+			vel = vel.rotated(deg_to_rad(180.0 * param) * dt)
 		"Beurnulli":
-			vel += perp * cos(t * 8.0 * param) * 600.0 * dt
+			vel += perp * cos(t * 10.0 * param) * 2500.0 * dt
 		"Folium":
-			vel += perp * (sin(t * 5.0) * cos(t * 5.0)) * 700.0 * param * dt
+			vel += perp * (sin(t * 6.0) * cos(t * 6.0)) * 2500.0 * param * dt
 		"Singularity":
-			vel += vel.normalized() * (500.0 * param) * dt
+			vel += vel.normalized() * (2000.0 * param) * dt
+	return vel
 
 func shoot() -> void:
 	if not bullet_scene or GameManager.current_state != GameManager.State.PLAYER_TURN:
