@@ -43,6 +43,15 @@ var discard_pile: Array[String] = []
 var hand: Array[String] = []
 
 func _ready() -> void:
+	reset_game_state()
+
+func reset_game_state() -> void:
+	current_state = State.PLAYER_1_TURN
+	p1_active_bullet = null
+	p2_active_bullet = null
+	active_player = 1
+	is_enemy_bullet_flying = false
+	selected_card = ""
 	p1_hp = p1_max_hp
 	p2_hp = p2_max_hp
 	update_ui_health()
@@ -95,13 +104,13 @@ func on_bullet_hit_function_wall(bullet: Node2D, collision_pos: Vector2) -> void
 		return
 
 	if bullet.is_in_group("player_1_bullet"):
-		active_player = 1
 		p1_active_bullet = bullet
-		current_state = State.WAITING_FOR_CARD_P1
-	elif bullet.is_in_group("player_2_bullet"):
 		active_player = 2
+		current_state = State.PLAYER_2_TURN
+	elif bullet.is_in_group("player_2_bullet"):
 		p2_active_bullet = bullet
-		current_state = State.WAITING_FOR_CARD_P2
+		active_player = 1
+		current_state = State.PLAYER_1_TURN
 	else:
 		is_enemy_bullet_flying = false
 		advance_turn_order()
@@ -121,11 +130,11 @@ func advance_turn_order() -> void:
 		current_state = State.PLAYER_1_TURN
 
 func apply_card_and_shoot_from_wall(card_type: String, new_direction: Vector2) -> void:
-	if active_player == 1 and p1_active_bullet != null:
+	if active_player == 1 and is_instance_valid(p1_active_bullet):
 		p1_active_bullet.unfreeze_with_function(card_type, new_direction)
 		p1_active_bullet = null
 		current_state = State.BULLET_FLYING
-	elif active_player == 2 and p2_active_bullet != null:
+	elif active_player == 2 and is_instance_valid(p2_active_bullet):
 		p2_active_bullet.unfreeze_with_function(card_type, new_direction)
 		p2_active_bullet = null
 		current_state = State.BULLET_FLYING
@@ -164,10 +173,23 @@ func trigger_game_over(reason: String) -> void:
 			end_ui.show()
 
 func handle_bullet_hit_entity(bullet: Node2D, collider: Node) -> void:
+	var hit_player := 0
 	if collider.is_in_group("player_1"):
-		take_p1_damage(1)
+		hit_player = 1
 	elif collider.is_in_group("player_2"):
-		take_p2_damage(1)
+		hit_player = 2
+
+	if hit_player != 0:
+		var damage_player = hit_player
+		if bullet is Bullet and bullet.is_under_function:
+			if (bullet.is_in_group("player_1_bullet") and hit_player == 1) or \
+					(bullet.is_in_group("player_2_bullet") and hit_player == 2):
+				damage_player = 2 if hit_player == 1 else 1
+
+		if damage_player == 1:
+			take_p1_damage(1)
+		else:
+			take_p2_damage(1)
 			
 	if is_instance_valid(bullet):
 		bullet.queue_free()

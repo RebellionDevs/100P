@@ -8,8 +8,12 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 
 func _process(delta: float) -> void:
-	var target_state = GameManager.State.WAITING_FOR_CARD_P1 if GameManager.active_player == 1 else GameManager.State.WAITING_FOR_CARD_P2
-	var is_active = (GameManager.current_state == target_state)
+	var has_active_bullet = GameManager.active_bullet != null and is_instance_valid(GameManager.active_bullet)
+	var is_active = (
+		(GameManager.current_state == GameManager.State.PLAYER_1_TURN or
+		GameManager.current_state == GameManager.State.PLAYER_2_TURN) and
+		has_active_bullet
+	)
 	
 	disabled = not is_active
 	
@@ -21,8 +25,10 @@ func _process(delta: float) -> void:
 	super._process(delta)
 
 func _on_pressed() -> void:
-	var target_state = GameManager.State.WAITING_FOR_CARD_P1 if GameManager.active_player == 1 else GameManager.State.WAITING_FOR_CARD_P2
-	if GameManager.current_state != target_state:
+	if GameManager.current_state != GameManager.State.PLAYER_1_TURN and \
+			GameManager.current_state != GameManager.State.PLAYER_2_TURN:
+		return
+	if GameManager.active_bullet == null or not is_instance_valid(GameManager.active_bullet):
 		return
 		
 	var ui = get_tree().current_scene.find_child("CardSelectionUI", true, false)

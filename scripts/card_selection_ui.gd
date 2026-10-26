@@ -84,13 +84,13 @@ func _on_card_left_clicked(card_name: String) -> void:
 	
 	GameManager.selected_card = card_name
 
-	if GameManager.current_state == GameManager.State.WAITING_FOR_CARD_P1:
+	if GameManager.active_player == 1:
 		GameManager.current_state = GameManager.State.AIMING_CARD_SHOT_P1
 		var player1 = get_tree().current_scene.find_child("Player_1", true, false)
 		if player1:
 			player1.singularity_point_set = false
 			player1.card_param = 1.0
-	elif GameManager.current_state == GameManager.State.WAITING_FOR_CARD_P2:
+	elif GameManager.active_player == 2:
 		GameManager.current_state = GameManager.State.AIMING_CARD_SHOT_P2
 		var player2 = get_tree().current_scene.find_child("Player_2", true, false)
 		if player2:

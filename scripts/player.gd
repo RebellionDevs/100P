@@ -232,7 +232,7 @@ func shoot() -> void:
 	if not bullet:
 		return
 
-	bullet.add_to_group("player_bullet")
+	bullet.add_to_group("player_1_bullet")
 	bullet.add_to_group("bullet")
 		
 	bullet.global_position = muzzle.global_position

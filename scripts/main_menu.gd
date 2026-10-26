@@ -11,6 +11,7 @@ func _ready() -> void:
 	settings_popup.visible = false
 	
 func _on_play_pressed() -> void:
+	GameManager.reset_game_state()
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 	
 func _on_settings_pressed() -> void:

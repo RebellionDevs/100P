@@ -17,6 +17,6 @@ func show_game_over(reason: String) -> void:
 	blur_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	show()
 
-func _gui_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if visible and event is InputEventMouseButton and event.pressed:
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
