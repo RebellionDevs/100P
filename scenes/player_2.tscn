@@ -1,36 +1,38 @@
-[gd_scene format=3 uid="uid://be8qbmt0fe144"]
+[gd_scene format=3 uid="uid://rub37kwk3kt6"]
 
-[ext_resource type="Script" uid="uid://cwqmrrjai1glx" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="PackedScene" uid="uid://dtclgpudk4ih3" path="res://scenes/bullet.tscn" id="2_g2els"]
-[ext_resource type="Texture2D" uid="uid://b6rhxo6reea7" path="res://assets/sprites/player_skin_1.png" id="3_qhqgy"]
-[ext_resource type="Texture2D" uid="uid://c5a0g4wekbj2w" path="res://assets/sprites/pistol.png" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://c1s7o2p43v2vj" path="res://scripts/player_2.gd" id="1_yjax8"]
+[ext_resource type="Texture2D" uid="uid://b6rhxo6reea7" path="res://assets/sprites/player_skin_1.png" id="3_v7tvf"]
+[ext_resource type="Texture2D" uid="uid://c5a0g4wekbj2w" path="res://assets/sprites/pistol.png" id="4_povjg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hh6ca"]
 radius = 1.0
 
 [node name="Player" type="StaticBody2D" unique_id=248845660 groups=["player"]]
-script = ExtResource("1_3vyb7")
-bullet_scene = ExtResource("2_g2els")
+script = ExtResource("1_yjax8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2146723943]
+position = Vector2(-0.1870799, 0.06235981)
 scale = Vector2(0.019662157, 0.01932988)
-texture = ExtResource("3_qhqgy")
+texture = ExtResource("3_v7tvf")
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=489161021]
-position = Vector2(-0.2, -0.1)
+position = Vector2(0.012024194, -0.00022445619)
 scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_hh6ca")
 
 [node name="GunPivot" type="Node2D" parent="." unique_id=64178165]
+position = Vector2(0.024943829, 0)
 
 [node name="GunSprite" type="Sprite2D" parent="GunPivot" unique_id=733342814]
-position = Vector2(-2.1953125, -0.34375)
+position = Vector2(0.31404066, -0.25168014)
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("4_dqkch")
+texture = ExtResource("4_povjg")
 centered = false
+flip_h = true
 
 [node name="Muzzle" type="Marker2D" parent="GunPivot" unique_id=1952067066]
-position = Vector2(-2.09375, -0.0625)
+position = Vector2(1.7476254, 0.012331963)
 
 [node name="TrajectoryLine" type="Line2D" parent="." unique_id=725570398]
 width = 1.0

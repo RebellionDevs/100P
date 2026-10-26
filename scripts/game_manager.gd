@@ -1,24 +1,48 @@
 extends Node
 
-enum State { PLAYER_TURN, BULLET_FLYING, AIMING_CARD_SHOT, WAITING_FOR_CARD, ENEMY_TURN, GAME_OVER }
-var current_state: State = State.PLAYER_TURN
+enum State { 
+	PLAYER_1_TURN, 
+	PLAYER_2_TURN, 
+	BULLET_FLYING,
+	WAITING_FOR_CARD_P1, 
+	WAITING_FOR_CARD_P2, 
+	AIMING_CARD_SHOT_P1, 
+	AIMING_CARD_SHOT_P2, 
+	GAME_OVER 
+}
+var current_state: State = State.PLAYER_1_TURN
 
-var active_bullet: Node2D = null
-var has_frozen_bullet: bool = false
+var p1_active_bullet: Node2D = null
+var p2_active_bullet: Node2D = null
+
+var active_bullet: Node2D:
+	get:
+		return p1_active_bullet if active_player == 1 else p2_active_bullet
+	set(val):
+		if active_player == 1:
+			p1_active_bullet = val
+		else:
+			p2_active_bullet = val
+
+var has_frozen_bullet: bool:
+	get:
+		return (p1_active_bullet != null) or (p2_active_bullet != null)
+
+var active_player: int = 1
 var selected_card: String = ""
 
-var player_max_hp: int = 3
-var player_hp: int = 3
-var enemy_max_hp: int = 3
-var enemy_hp: int = 3
+var p1_max_hp: int = 3
+var p1_hp: int = 3
+var p2_max_hp: int = 3
+var p2_hp: int = 3
 
 var deck: Array[String] = []
 var discard_pile: Array[String] = []
 var hand: Array[String] = []
 
 func _ready() -> void:
-	player_hp = player_max_hp
-	enemy_hp = enemy_max_hp
+	p1_hp = p1_max_hp
+	p2_hp = p2_max_hp
 	update_ui_health()
 	init_deck()
 
@@ -45,7 +69,7 @@ func init_deck() -> void:
 
 func draw_hand() -> void:
 	if deck.is_empty() and discard_pile.is_empty() and hand.is_empty():
-		trigger_game_over("defeat")
+		trigger_game_over("Game Over (Deck Empty)")
 		return
 
 	hand.clear()
@@ -65,42 +89,72 @@ func discard_current_hand() -> void:
 	hand.clear()
 
 func on_bullet_hit_function_wall(bullet: Node2D, collision_pos: Vector2) -> void:
-	active_bullet = bullet
-	has_frozen_bullet = true
-	start_enemy_turn()
+	if active_player == 1:
+		p1_active_bullet = bullet
+		current_state = State.WAITING_FOR_CARD_P1
+	else:
+		p2_active_bullet = bullet
+		current_state = State.WAITING_FOR_CARD_P2
 
 func on_bullet_destroyed() -> void:
-	active_bullet = null
-	has_frozen_bullet = false
-	start_enemy_turn()
+	advance_turn_order()
 
-func take_player_damage(amount: int) -> void:
-	player_hp = max(0, player_hp - amount)
-	update_ui_health()
-	if player_hp <= 0:
-		trigger_game_over("defeat")
+func advance_turn_order() -> void:
+	if current_state == State.GAME_OVER:
+		return
+		
+	if p1_active_bullet != null:
+		current_state = State.WAITING_FOR_CARD_P1
+		active_player = 1
+		return
+	if p2_active_bullet != null:
+		current_state = State.WAITING_FOR_CARD_P2
+		active_player = 2
+		return
+		
+	if active_player == 1:
+		active_player = 2
+		current_state = State.PLAYER_2_TURN
+	else:
+		active_player = 1
+		current_state = State.PLAYER_1_TURN
 
-func take_enemy_damage(amount: int) -> void:
-	enemy_hp = max(0, enemy_hp - amount)
+func apply_card_and_shoot_from_wall(card_type: String, new_direction: Vector2) -> void:
+	if active_player == 1 and p1_active_bullet != null:
+		p1_active_bullet.unfreeze_with_function(card_type, new_direction)
+		p1_active_bullet = null
+		current_state = State.BULLET_FLYING
+	elif active_player == 2 and p2_active_bullet != null:
+		p2_active_bullet.unfreeze_with_function(card_type, new_direction)
+		p2_active_bullet = null
+		current_state = State.BULLET_FLYING
+
+func take_p1_damage(amount: int) -> void:
+	p1_hp = max(0, p1_hp - amount)
 	update_ui_health()
-	if enemy_hp <= 0:
-		trigger_game_over("win")
+	if p1_hp <= 0:
+		trigger_game_over("Player 2 Wins!")
+
+func take_p2_damage(amount: int) -> void:
+	p2_hp = max(0, p2_hp - amount)
+	update_ui_health()
+	if p2_hp <= 0:
+		trigger_game_over("Player 1 Wins!")
 
 func update_ui_health() -> void:
 	var tree = get_tree()
 	if not tree: return
 	
-	var player_health_ui = tree.current_scene.find_child("PlayerHealth", true, false)
-	if player_health_ui and player_health_ui.has_method("update_health"):
-		player_health_ui.update_health(player_hp)
+	var p1_ui = tree.current_scene.find_child("Player1Health", true, false)
+	if p1_ui and p1_ui.has_method("update_health"):
+		p1_ui.update_health(p1_hp)
 		
-	var enemy_health_ui = tree.current_scene.find_child("EnemyHealth", true, false)
-	if enemy_health_ui and enemy_health_ui.has_method("update_health"):
-		enemy_health_ui.update_health(enemy_hp)
+	var p2_ui = tree.current_scene.find_child("Player2Health", true, false)
+	if p2_ui and p2_ui.has_method("update_health"):
+		p2_ui.update_health(p2_hp)
 
 func trigger_game_over(reason: String) -> void:
 	current_state = State.GAME_OVER
-	
 	var end_ui = get_tree().current_scene.find_child("GameOverUI", true, false)
 	if end_ui:
 		if end_ui.has_method("show_game_over"):
@@ -108,36 +162,18 @@ func trigger_game_over(reason: String) -> void:
 		elif end_ui.has_method("show"):
 			end_ui.show()
 
-func start_enemy_turn() -> void:
-	current_state = State.ENEMY_TURN
-	await get_tree().create_timer(1.0).timeout
-	if current_state != State.GAME_OVER:
-		start_player_turn()
-
-func start_player_turn() -> void:
-	current_state = State.PLAYER_TURN
-	if has_frozen_bullet and active_bullet:
-		current_state = State.WAITING_FOR_CARD
-
-func apply_card_and_shoot_from_wall(card_type: String, new_direction: Vector2) -> void:
-	if current_state != State.WAITING_FOR_CARD or not active_bullet:
-		return
-		
-	has_frozen_bullet = false
-	active_bullet.unfreeze_with_function(card_type, new_direction)
-	current_state = State.BULLET_FLYING
-
 func handle_bullet_hit_entity(bullet: Node2D, collider: Node) -> void:
-	var is_func = bullet.get("is_under_function") == true
-	
-	if collider.is_in_group("player"):
-		if is_func:
-			take_enemy_damage(1)
-		else:
-			take_player_damage(1)
+	if collider.is_in_group("player_1"):
+		take_p1_damage(1)
+	elif collider.is_in_group("player_2"):
+		take_p2_damage(1)
 			
-	elif collider.is_in_group("enemy"):
-			take_player_damage(1)
-			
-	if current_state != State.GAME_OVER:
-		start_enemy_turn()
+	if is_instance_valid(bullet):
+		bullet.queue_free()
+		
+	if bullet == p1_active_bullet:
+		p1_active_bullet = null
+	if bullet == p2_active_bullet:
+		p2_active_bullet = null
+		
+	advance_turn_order()

@@ -25,14 +25,14 @@ func can_shoot() -> bool:
 	var ui = get_tree().current_scene.find_child("CardSelectionUI", true, false)
 	if ui and ui.visible:
 		return false
-	return GameManager.current_state == GameManager.State.PLAYER_TURN or GameManager.current_state == GameManager.State.AIMING_CARD_SHOT
+	return GameManager.current_state == GameManager.State.PLAYER_1_TURN or GameManager.current_state == GameManager.State.AIMING_CARD_SHOT_P1
 
 func _process(_delta: float) -> void:
 	if not can_shoot():
 		trajectory_line.clear_points()
 		return
 	
-	if GameManager.current_state == GameManager.State.PLAYER_TURN:
+	if GameManager.current_state == GameManager.State.PLAYER_1_TURN:
 		if not is_mouse_in_bounds():
 			trajectory_line.clear_points()
 			return
@@ -40,7 +40,7 @@ func _process(_delta: float) -> void:
 		gun_pivot.rotation = (mouse_pos - global_position).angle() + PI
 		update_normal_trajectory()
 		
-	elif GameManager.current_state == GameManager.State.AIMING_CARD_SHOT:
+	elif GameManager.current_state == GameManager.State.AIMING_CARD_SHOT_P1:
 		update_card_trajectory_from_wall()
 
 func is_mouse_in_bounds() -> bool:
@@ -57,7 +57,7 @@ func is_mouse_in_bounds() -> bool:
 	return false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if GameManager.current_state == GameManager.State.AIMING_CARD_SHOT:
+	if GameManager.current_state == GameManager.State.AIMING_CARD_SHOT_P1:
 		if event is InputEventMouseButton and event.pressed:
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				card_param = clampf(card_param + 0.2, 0.2, 5.0)
@@ -72,9 +72,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not is_mouse_in_bounds():
 			return
 			
-		if GameManager.current_state == GameManager.State.PLAYER_TURN:
+		if GameManager.current_state == GameManager.State.PLAYER_1_TURN:
 			shoot()
-		elif GameManager.current_state == GameManager.State.AIMING_CARD_SHOT:
+		elif GameManager.current_state == GameManager.State.AIMING_CARD_SHOT_P1:
 			if GameManager.selected_card == "Singularity" and not singularity_point_set:
 				singularity_pos = get_global_mouse_position()
 				singularity_point_set = true
@@ -221,7 +221,7 @@ func apply_card_math(vel: Vector2, t: float, card_name: String, dt: float, param
 	return vel
 
 func shoot() -> void:
-	if not bullet_scene or GameManager.current_state != GameManager.State.PLAYER_TURN:
+	if not bullet_scene or GameManager.current_state != GameManager.State.PLAYER_1_TURN:
 		return
 		
 	if GameManager.active_bullet and is_instance_valid(GameManager.active_bullet):
@@ -242,7 +242,7 @@ func shoot() -> void:
 	GameManager.current_state = GameManager.State.BULLET_FLYING
 
 func shoot_from_wall() -> void:
-	if GameManager.current_state != GameManager.State.AIMING_CARD_SHOT:
+	if GameManager.current_state != GameManager.State.AIMING_CARD_SHOT_P1:
 		return
 		
 	if GameManager.active_bullet and is_instance_valid(GameManager.active_bullet):

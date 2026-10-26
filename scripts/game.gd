@@ -9,14 +9,18 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	match GameManager.current_state:
-		GameManager.State.PLAYER_TURN:
-			game_state_label.text = "Player Turn"
+		GameManager.State.PLAYER_1_TURN:
+			game_state_label.text = "P1 Turn"
+		GameManager.State.PLAYER_2_TURN:
+			game_state_label.text = "P2 Turn"
 		GameManager.State.BULLET_FLYING:
 			game_state_label.text = "Bullet Flying"
-		GameManager.State.WAITING_FOR_CARD:
-			game_state_label.text = "Waiting for Card"
-		GameManager.State.ENEMY_TURN:
-			game_state_label.text = "Enemy Turn"
+		GameManager.State.WAITING_FOR_CARD_P1:
+			game_state_label.text = "P1: Waiting for Card"
+		GameManager.State.WAITING_FOR_CARD_P2:
+			game_state_label.text = "P2: Waiting for Card"
+		GameManager.State.GAME_OVER:
+			game_state_label.text = "Game Over"
 			
 	card_left_label.text = "Cards Left: " + str(GameManager.deck.size())
 

@@ -29,9 +29,9 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 function_wall="allow to use function card"
-player=""
 enemy=""
-level_bounds=""
+player_2=""
+player_1=""
 
 [physics]
 

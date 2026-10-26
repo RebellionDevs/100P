@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b275oxie6xxlq" path="res://scripts/level_1.gd" id="1_w8wmq"]
 [ext_resource type="Texture2D" uid="uid://0k07ly25m7qg" path="res://assets/sprites/level-1.png" id="2_w8wmq"]
-[ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://scenes/player.tscn" id="3_w8wmq"]
-[ext_resource type="PackedScene" uid="uid://q3w2hwk1ne3n" path="res://scenes/enemy.tscn" id="4_67dni"]
+[ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://scenes/player_1.tscn" id="3_w8wmq"]
+[ext_resource type="PackedScene" uid="uid://rub37kwk3kt6" path="res://scenes/player_2.tscn" id="4_67dni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67dni"]
 size = Vector2(1162.5, 771.5)
@@ -67,13 +67,13 @@ polygon = PackedVector2Array(859, 310, 860, 437, 1008, 434, 1007, 309)
 position = Vector2(985.75, 446.25)
 shape = SubResource("RectangleShape2D_67dni")
 
-[node name="Player" parent="." unique_id=820453694 instance=ExtResource("3_w8wmq")]
+[node name="Player_1" parent="." unique_id=820453694 instance=ExtResource("3_w8wmq")]
 position = Vector2(1392.9999, 477.99997)
 scale = Vector2(50, 50)
 
-[node name="Enemy" parent="." unique_id=248845660 instance=ExtResource("4_67dni")]
-position = Vector2(528, 684)
-scale = Vector2(60, 60)
+[node name="Player_2" parent="." unique_id=248845660 instance=ExtResource("4_67dni")]
+position = Vector2(507, 721)
+scale = Vector2(50, 50)
 
 [connection signal="body_entered" from="IntegralZone" to="." method="_on_integral_zone_body_entered"]
 [connection signal="body_exited" from="IntegralZone" to="." method="_on_integral_zone_body_exited"]
