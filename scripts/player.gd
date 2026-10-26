@@ -160,6 +160,10 @@ func update_card_trajectory_from_wall() -> void:
 		virtual_time += dt
 		current_velocity = apply_card_math(current_velocity, virtual_time, GameManager.selected_card, dt, card_param)
 		
+		if is_point_in_any_integral_zone(current_pos):
+			var perp = Vector2(-current_velocity.y, current_velocity.x).normalized()
+			current_velocity += perp * 800.0 * dt
+		
 		var target_pos = current_pos + current_velocity * dt
 		var ray_query = PhysicsRayQueryParameters2D.create(current_pos, target_pos)
 		ray_query.collision_mask = 0xFFFFFFFF
@@ -199,6 +203,20 @@ func update_card_trajectory_from_wall() -> void:
 	current_path = full_path
 	trajectory_line.points = preview_path
 
+func is_point_in_any_integral_zone(point: Vector2) -> bool:
+	var space_state = get_world_2d().direct_space_state
+	var point_query = PhysicsPointQueryParameters2D.new()
+	point_query.position = point
+	point_query.collide_with_areas = true
+	point_query.collision_mask = 0xFFFFFFFF
+	
+	var results = space_state.intersect_point(point_query)
+	for res in results:
+		var collider = res.collider
+		if collider and (collider.is_in_group("integral_zone") or (collider.owner and collider.owner.is_in_group("integral_zone"))):
+			return true
+	return false
+
 func apply_card_math(vel: Vector2, t: float, card_name: String, dt: float, param: float) -> Vector2:
 	var perp = Vector2(-vel.y, vel.x).normalized()
 	match card_name:
@@ -231,6 +249,7 @@ func shoot() -> void:
 		
 	var bullet = bullet_scene.instantiate() as CharacterBody2D
 	bullet.add_to_group("player_bullet")
+	bullet.add_to_group("bullet")
 	if not bullet:
 		return
 		
